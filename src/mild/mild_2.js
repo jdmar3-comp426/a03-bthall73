@@ -28,7 +28,10 @@ export function identifyVariable(variable) {
  */
 export function identifyArray(array) {
    let arr = [];
-   array.forEach(item => {arr[identifyVariable(item)]});
+   for (let i = 0; i < array.length; i++) {
+      arr[i] = identifyVariable(array[i]);
+   }
+   //array.forEach(item => {arr[identifyVariable(item)]});
    return arr;
 }
 
