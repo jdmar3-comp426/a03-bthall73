@@ -28,7 +28,7 @@ export function identifyVariable(variable) {
  */
 export function identifyArray(array) {
    let arr = [];
-   array.forEach(item => arr[identifyVariable(item)]);
+   array.forEach(item => {arr[identifyVariable(item)]});
    return arr;
 }
 
@@ -49,7 +49,6 @@ export function identifyArray(array) {
  obj now does not contain the `password` field
  */
 export function removeKey(object, key) {
-   //delete object.key(key);
    delete object[key];
    return object;
 }
