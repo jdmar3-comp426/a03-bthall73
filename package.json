@@ -2,7 +2,7 @@
   "name": "a03",
   "version": "2.1.0",
   "description": "",
-  "type": "module",
+  
   "main": "test.js",
   "scripts": {
     "mild_1": "node src/mild/mild_1.js",
