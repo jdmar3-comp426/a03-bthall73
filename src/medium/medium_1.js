@@ -33,7 +33,7 @@ export function getMedian(array) {
         let middleSum = array[size / 2] + array[(size / 2) - 1];
         median = middleSum / 2;
     } else {
-        median = array[size / 2];
+        median = array[(size / 2) - .5];
     }
     return median;
 }
