@@ -64,13 +64,13 @@ export function getStatistics(array) {
     }
     let mean = total / array.length;
     return {
-        min: Math.min(...array),
-        median: getMedian(array), 
+        length: array.length,
+        sum: total,
+        mean: mean,
+        median: getMedian(array),
+        min: Math.min(...array), 
         max: Math.max(...array),
-        variance: variance(array, mean),
-        mean: mean, 
-        length: array.length, 
-        sum: total, 
+        variance: variance(array, mean),  
         standard_deviation: Math.sqrt(variance(array, mean))
     }
 }
