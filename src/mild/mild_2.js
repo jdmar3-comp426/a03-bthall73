@@ -31,7 +31,6 @@ export function identifyArray(array) {
    for (let i = 0; i < array.length; i++) {
       arr[i] = identifyVariable(array[i]);
    }
-   //array.forEach(item => {arr[identifyVariable(item)]});
    return arr;
 }
 
@@ -73,8 +72,9 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-   //let { key, ...noKey } = newObject;
-   //return newObject; 
+   let obj = object;
+   delete obj[key];
+   return obj; 
 }
 
 /**
