@@ -121,3 +121,18 @@ export const moreStats = {
     makerHybrids: undefined,
     avgMpgByYearAndHybrid: undefined
 };
+
+/*function makerHybridsHelper() {
+    let returnArray = [];
+    let hybridsArray = [];
+    for (let i = 0; i < mpg_data.length; i++) {
+        if (mpg_data[i].hybrid == false) {
+            continue;
+        } else {
+            returnArray.push({ 
+                make: mpg_data[i].make, 
+                hybrids: 
+            })
+        }
+    }
+} */
