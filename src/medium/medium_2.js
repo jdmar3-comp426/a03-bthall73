@@ -202,7 +202,7 @@ function makerHybridsHelper() {
         obj = {};
         idsArray = [];
     }
-    returnArray.sort((a, b) => b[hybrids].length - a[hybrids].length);
+    //returnArray.sort((a, b) => b[hybrids].length - a[hybrids].length);
     return returnArray;
 }
 
