@@ -119,8 +119,58 @@ function avgMpgHelper() {
  */
 export const moreStats = {
     makerHybrids: makerHybridsHelper(),
-    avgMpgByYearAndHybrid: undefined
+    avgMpgByYearAndHybrid: avgMpgByYearAndHybridHelper()
 };
+
+function avgMpgByYearAndHybridHelper() {
+    let returnObj = {};
+    let yearsArray = [];
+    let totalHybrids = 0;
+    let hybridCity = 0;
+    let hybridHwy = 0;
+    let totalNon = 0;
+    let nonCity = 0;
+    let nonHwy = 0;
+    mpg_data.forEach(item => {
+        if (!yearsArray[item.year]) {
+            yearsArray.push(item.year);
+        }
+    })
+    for (let i = 0; i < yearsArray.length; i++) {
+        for (let j = 0; j < mpg_data.length; j++) {
+            if (yearsArray[i] == mpg_data[j].year) {
+                if (mpg_data[j].hybrid == true) {
+                    totalHybrids++;
+                    hybridCity += mpg_data[j].city_mpg; 
+                    hybridHwy += mpg_data[j].highway_mpg;
+                } else {
+                    totalNon++;
+                    nonCity += mpg_data[j].city_mpg;
+                    nonHwy += mpg_data[j].highway_mpg;
+                }
+            }
+        }
+        returnObj[i] = {
+            2020: {
+                hybrid: {
+                    city: hybridCity / totalHybrids,
+                    highway: hybridHwy / totalHybrids
+                },
+                nonHybrid: {
+                    city: nonCity / totalNon,
+                    highway: nonHwy / totalNon
+                }
+            }
+        }
+        totalHybrids = 0;
+        hybridCity = 0;
+        hybridHwy = 0;
+        totalNon = 0;
+        nonCity = 0;
+        nonHwy = 0;
+    }
+    return returnObj;
+}
 
 function makerHybridsHelper() {
     let returnArray = [];
@@ -144,27 +194,15 @@ function makerHybridsHelper() {
                 idsArray.push(hybridsArray[j].id);
             }
         }
-        obj[i] = {
+        obj = {
             make: makesArray[i],
             hybrids: idsArray
         }
+        returnArray.push(obj);
+        obj = {};
         idsArray = [];
     }
-    return obj;
-    
+    returnArray.sort((a, b) => b[hybrids].length - a[hybrids].length);
+    return returnArray;
 }
 
-/*function makerHybridsHelper() {
-    let returnArray = [];
-    let hybridsArray = [];
-    for (let i = 0; i < mpg_data.length; i++) {
-        if (mpg_data[i].hybrid == false) {
-            continue;
-        } else {
-            returnArray.push({ 
-                make: mpg_data[i].make, 
-                hybrids: 
-            })
-        }
-    }
-} */
