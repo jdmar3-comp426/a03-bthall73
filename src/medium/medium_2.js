@@ -118,9 +118,41 @@ function avgMpgHelper() {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: makerHybridsHelper(),
     avgMpgByYearAndHybrid: undefined
 };
+
+function makerHybridsHelper() {
+    let returnArray = [];
+    let hybridsArray = []; 
+    for (let i = 0; i < mpg_data.length; i++) {
+        if (mpg_data[i].hybrid == true) {
+            hybridsArray.push(mpg_data[i]);
+        }
+    }
+    let makesArray = [];
+    hybridsArray.forEach(item => {
+        if (!makesArray[item.make]) {
+            makesArray.push(item.make);
+        }
+    })
+    let obj = {};
+    let idsArray = [];
+    for (let i = 0; i < makesArray.length; i++) {
+        for (let j = 0; j < hybridsArray.length; j++) {
+            if (makesArray[i] == hybridsArray[j].make) {
+                idsArray.push(hybridsArray[j].id);
+            }
+        }
+        obj[i] = {
+            make: makesArray[i],
+            hybrids: idsArray
+        }
+        idsArray = [];
+    }
+    return obj;
+    
+}
 
 /*function makerHybridsHelper() {
     let returnArray = [];
