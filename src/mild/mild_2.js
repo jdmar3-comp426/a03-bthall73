@@ -55,6 +55,7 @@ export function removeKey(object, key) {
    return object;
 }
 
+
 /**
  * Does not mutate the object passed in
  * @param object
@@ -72,9 +73,11 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-   let obj = object;
-   return removeKey(obj, key); 
+   let remove = key;
+   let { [remove]: removeKey, ...rest } = object;
+   return rest; 
 }
+
 
 /**
  * Remove and return the listed keys. Without mutating the object passed in.
@@ -98,9 +101,9 @@ export function removeKeyNonDestructive(object, key) {
  * @return {*} The object with its keys removed.
  */
 export function removeKeys(object, keyList) {
-   let obj = object;
+   let output = object;
    for (let i = 0; i < keyList.length; i++) {
-      obj = removeKeyNonDestructive(obj, keyList[i]);
+      output = removeKeyNonDestructive(output, keyList[i]);
    }
-   return obj;
+   return output;
 }
