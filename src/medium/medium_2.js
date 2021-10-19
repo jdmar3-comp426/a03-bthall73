@@ -124,6 +124,8 @@ export const moreStats = {
     avgMpgByYearAndHybrid: avgMpgByYearAndHybridHelper()
 };
 
+console.log(moreStats);
+
 function avgMpgByYearAndHybridHelper() {
     let returnObj = {};
     let yearsArray = [];
@@ -133,11 +135,12 @@ function avgMpgByYearAndHybridHelper() {
     let totalNon = 0;
     let nonCity = 0;
     let nonHwy = 0;
-    mpg_data.forEach(item => {
-        if (!yearsArray[item.year]) {
-            yearsArray.push(item.year);
-        }
-    })
+
+    for (let i = 0; i < mpg_data.length; i++) {
+        yearsArray.push(mpg_data[i].year);
+    }
+    yearsArray = [...new Set(yearsArray)];
+    
     for (let i = 0; i < yearsArray.length; i++) {
         for (let j = 0; j < mpg_data.length; j++) {
             if (yearsArray[i] == mpg_data[j].year) {
@@ -153,7 +156,7 @@ function avgMpgByYearAndHybridHelper() {
             }
         }
         returnObj[i] = {
-            2020: {
+            1: {
                 hybrid: {
                     city: hybridCity / totalHybrids,
                     highway: hybridHwy / totalHybrids
@@ -177,31 +180,36 @@ function avgMpgByYearAndHybridHelper() {
 function makerHybridsHelper() {
     let returnArray = [];
     let hybridsArray = []; 
+    let makesArray = [];
     for (let i = 0; i < mpg_data.length; i++) {
         if (mpg_data[i].hybrid == true) {
             hybridsArray.push(mpg_data[i]);
         }
     }
-    let makesArray = [];
-    hybridsArray.forEach(item => {
-        if (!makesArray[item.make]) {
-            makesArray.push(item.make);
-        }
-    })
-    let obj = {};
+
+    for (let i = 0; i < hybridsArray.length; i++) {
+        makesArray.push(hybridsArray[i].make);
+    }
+    makesArray = [...new Set(makesArray)];
+    
+    //let obj = {};
+    //let objArray = [];
+    let idsArrayArray = [];
     let idsArray = [];
     for (let i = 0; i < makesArray.length; i++) {
         for (let j = 0; j < hybridsArray.length; j++) {
             if (makesArray[i] == hybridsArray[j].make) {
                 idsArray.push(hybridsArray[j].id);
+                idsArrayArray[i] = idsArray;
             }
         }
-        obj = {
+        //idsArrayArray.push(idsArray);
+        //console.log(idsArrayArray);
+        returnArray[i] = {
             make: makesArray[i],
-            hybrids: idsArray
+            hybrids: idsArrayArray[i]
         }
-        returnArray.push(obj);
-        obj = {};
+        //obj = {};
         idsArray = [];
     }
     //returnArray.sort((a, b) => b[hybrids].length - a[hybrids].length);
