@@ -127,7 +127,7 @@ export const moreStats = {
 console.log(moreStats);
 
 function avgMpgByYearAndHybridHelper() {
-    let returnObj = {};
+    let returnArray = [];
     let yearsArray = [];
     let totalHybrids = 0;
     let hybridCity = 0;
@@ -155,8 +155,8 @@ function avgMpgByYearAndHybridHelper() {
                 }
             }
         }
-        returnObj[i] = {
-            1: {
+        returnArray[i] = {
+            [yearsArray[i]]: {
                 hybrid: {
                     city: hybridCity / totalHybrids,
                     highway: hybridHwy / totalHybrids
@@ -174,8 +174,9 @@ function avgMpgByYearAndHybridHelper() {
         nonCity = 0;
         nonHwy = 0;
     }
-    return returnObj;
-}
+    console.log(returnArray);
+    return returnArray;
+} 
 
 function makerHybridsHelper() {
     let returnArray = [];
@@ -212,7 +213,7 @@ function makerHybridsHelper() {
         //obj = {};
         idsArray = [];
     }
-    //returnArray.sort((a, b) => b[hybrids].length - a[hybrids].length);
+    returnArray.sort((a, b) => b.hybrids.length - a.hybrids.length);
     return returnArray;
 }
 

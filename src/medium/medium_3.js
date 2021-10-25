@@ -18,9 +18,13 @@ queries.
  *
  */
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-
+    const result = car_data.filter(cars => cars.horsepower >= minHorsepower && cars.torque >= minTorque);
+    const sorted = result.sort(function(a, b) {
+        return parseFloat(b.horsepower) - parseFloat(a.horsepower);
+    })
+    return sorted;
 }
-
+//console.log(searchHighPower(mpg_data, 250, 150));
 
 /**
  * @param {array} car_data
@@ -33,8 +37,14 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-
+    const result = car_data.filter(cars => cars.highway_mpg >= minHighway && cars.city_mpg >= minCity);
+    const sorted = result.sort(function(a, b) {
+        return parseFloat(b.highway_mpg) - parseFloat(a.highway_mpg);
+    })
+    return sorted;
 }
+
+//console.log(searchMpg(mpg_data, 28, 28));
 
 
 /**
@@ -46,8 +56,14 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-
+    const result = car_data.filter(cars => cars.id.toLowerCase().includes(searchTerm) || cars.id.includes(searchTerm));
+    //const sorted = result.sort(function(a, b) {
+        //return a.localeCompare(b);
+    //})
+    //return sorted;
+    return result;
 }
+console.log(searchName(mpg_data, "Audi"));
 
 
 /**
