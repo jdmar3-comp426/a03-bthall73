@@ -57,13 +57,12 @@ export function searchMpg(car_data, minCity, minHighway) {
  */
 export function searchName(car_data, searchTerm) {
     const result = car_data.filter(cars => cars.id.toLowerCase().includes(searchTerm) || cars.id.includes(searchTerm));
-    //const sorted = result.sort(function(a, b) {
-        //return a.localeCompare(b);
-    //})
-    //return sorted;
-    return result;
+    const sorted = result.sort(function(a, b) {
+        return parseFloat(b.id.indexOf(searchTerm || searchTerm.toLowerCase())) - parseFloat(a.id.indexOf(searchTerm || searchTerm.toLowerCase()));
+    })
+    return sorted;
 }
-console.log(searchName(mpg_data, "Audi"));
+console.log(searchName(mpg_data, "hp"));
 
 
 /**
@@ -75,5 +74,11 @@ console.log(searchName(mpg_data, "Audi"));
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
-
+    const result = car_data.filter(cars => years.includes(cars.year));
+    const sorted = result.sort(function(a, b) {
+        return parseFloat(b.year) - parseFloat(a.year);
+    }) 
+    return sorted;
 }
+
+//console.log(searchByYear(mpg_data, [2010, 2012]));

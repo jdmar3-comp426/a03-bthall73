@@ -124,26 +124,58 @@ export const moreStats = {
     avgMpgByYearAndHybrid: avgMpgByYearAndHybridHelper()
 };
 
-console.log(moreStats);
+//console.log(moreStats); 
+
+// makerHybridsHelper Function
+
+function makerHybridsHelper() {
+    const hybrids = mpg_data.filter(cars => cars.hybrid == true);
+    let makes = hybrids.map(cars => cars.make);
+    makes = [...new Set(makes)];
+    let idsArray = [];
+    let idsAll = [];
+    for (let i = 0; i < makes.length; i++) {
+        for (let j = 0; j < hybrids.length; j++) {
+            if (makes[i] == hybrids[j].make) {
+                idsArray.push(hybrids[j].id);
+            }
+        }
+        idsAll.push(idsArray);
+        idsArray = [];
+    }
+    let returnArray = [];
+    for (let i = 0; i < makes.length; i++) {
+        returnArray[i] = {
+            make: makes[i],
+            hybrids: idsAll[i]
+        }
+    }
+    const returnArraySorted = returnArray.sort(function(a, b) {
+        return parseFloat(b.hybrids.length) - parseFloat(a.hybrids.length);
+    })
+    return returnArraySorted;
+} 
+
+//avgMpgByYearAndHybridHelper Function
 
 function avgMpgByYearAndHybridHelper() {
-    let returnArray = [];
-    let yearsArray = [];
     let totalHybrids = 0;
+    let totalHybridsArray = [];
     let hybridCity = 0;
+    let hybridCityArray = [];
     let hybridHwy = 0;
+    let hybridHwyArray = [];
     let totalNon = 0;
+    let totalNonArray = [];
     let nonCity = 0;
+    let nonCityArray = [];
     let nonHwy = 0;
-
-    for (let i = 0; i < mpg_data.length; i++) {
-        yearsArray.push(mpg_data[i].year);
-    }
-    yearsArray = [...new Set(yearsArray)];
-    
-    for (let i = 0; i < yearsArray.length; i++) {
+    let nonHwyArray = [];
+    let years = mpg_data.map(cars => cars.year);
+    years = [...new Set(years)];
+    for (let i = 0; i < years.length; i++) {
         for (let j = 0; j < mpg_data.length; j++) {
-            if (yearsArray[i] == mpg_data[j].year) {
+            if (years[i] == mpg_data[j].year) {
                 if (mpg_data[j].hybrid == true) {
                     totalHybrids++;
                     hybridCity += mpg_data[j].city_mpg; 
@@ -155,65 +187,33 @@ function avgMpgByYearAndHybridHelper() {
                 }
             }
         }
-        returnArray[i] = {
-            [yearsArray[i]]: {
-                hybrid: {
-                    city: hybridCity / totalHybrids,
-                    highway: hybridHwy / totalHybrids
-                },
-                nonHybrid: {
-                    city: nonCity / totalNon,
-                    highway: nonHwy / totalNon
-                }
-            }
-        }
+        totalHybridsArray[i] = totalHybrids;
+        hybridCityArray[i] = hybridCity;
+        hybridHwyArray[i] = hybridHwy;
+        totalNonArray[i] = totalNon;
+        nonCityArray[i] = nonCity;
+        nonHwyArray[i] = nonHwy;
         totalHybrids = 0;
-        hybridCity = 0;
+        hybridCity = 0; 
         hybridHwy = 0;
         totalNon = 0;
         nonCity = 0;
         nonHwy = 0;
     }
-    console.log(returnArray);
-    return returnArray;
-} 
-
-function makerHybridsHelper() {
-    let returnArray = [];
-    let hybridsArray = []; 
-    let makesArray = [];
-    for (let i = 0; i < mpg_data.length; i++) {
-        if (mpg_data[i].hybrid == true) {
-            hybridsArray.push(mpg_data[i]);
-        }
-    }
-
-    for (let i = 0; i < hybridsArray.length; i++) {
-        makesArray.push(hybridsArray[i].make);
-    }
-    makesArray = [...new Set(makesArray)];
-    
-    //let obj = {};
-    //let objArray = [];
-    let idsArrayArray = [];
-    let idsArray = [];
-    for (let i = 0; i < makesArray.length; i++) {
-        for (let j = 0; j < hybridsArray.length; j++) {
-            if (makesArray[i] == hybridsArray[j].make) {
-                idsArray.push(hybridsArray[j].id);
-                idsArrayArray[i] = idsArray;
+    let returnObj = {}; 
+    for (let i = 0; i < years.length; i++) {
+        returnObj[years[i]] = {
+            hybrid: {
+                city: hybridCityArray[i] / totalHybridsArray[i],
+                highway: hybridHwyArray[i] / totalHybridsArray[i]
+            },
+            nonHybrid: {
+                city: nonCityArray[i] / totalNonArray[i],
+                highway: nonHwyArray[i] / totalNonArray[i]
             }
         }
-        //idsArrayArray.push(idsArray);
-        //console.log(idsArrayArray);
-        returnArray[i] = {
-            make: makesArray[i],
-            hybrids: idsArrayArray[i]
-        }
-        //obj = {};
-        idsArray = [];
     }
-    returnArray.sort((a, b) => b.hybrids.length - a.hybrids.length);
-    return returnArray;
+    return returnObj;
+    //console.log(returnObj);
 }
 
