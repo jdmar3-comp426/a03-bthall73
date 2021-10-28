@@ -62,7 +62,7 @@ export function searchName(car_data, searchTerm) {
     })
     return sorted;
 }
-console.log(searchName(mpg_data, "hp"));
+//console.log(searchName(mpg_data, "hp"));
 
 
 /**
