@@ -25,8 +25,6 @@ export const allCarStats = {
     ratioHybrids: ratioHybridsHelper(),
 };
 
-//console.log(allCarStats);
-
 function ratioHybridsHelper() {
     let totalCars = mpg_data.length;
     let hybridCount = 0;
