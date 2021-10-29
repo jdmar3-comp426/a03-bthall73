@@ -120,9 +120,7 @@ function avgMpgHelper() {
 export const moreStats = {
     makerHybrids: makerHybridsHelper(),
     avgMpgByYearAndHybrid: avgMpgByYearAndHybridHelper()
-};
-
-//console.log(moreStats); 
+}; 
 
 // makerHybridsHelper Function
 
@@ -212,6 +210,5 @@ function avgMpgByYearAndHybridHelper() {
         }
     }
     return returnObj;
-    //console.log(returnObj);
 }
 
