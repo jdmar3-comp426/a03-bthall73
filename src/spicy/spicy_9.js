@@ -28,10 +28,12 @@ export const repeat = (fn, n, ...params) => {
  *   10 times.
  */
 export const repeatDemo = () => {
-    //console.log("Hello, world!");
+    repeat(helper(), 10);
 };
 
-//repeat(repeatDemo, 10);
+function helper() {
+    console.log("Hello, world!");
+}
 
 
 /**************************************************************************
