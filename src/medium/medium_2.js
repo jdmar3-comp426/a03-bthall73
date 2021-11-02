@@ -203,7 +203,7 @@ function avgMpgByYearAndHybridHelper() {
                 city: hybridCityArray[i] / totalHybridsArray[i],
                 highway: hybridHwyArray[i] / totalHybridsArray[i]
             },
-            nonHybrid: {
+            notHybrid: {
                 city: nonCityArray[i] / totalNonArray[i],
                 highway: nonHwyArray[i] / totalNonArray[i]
             }
