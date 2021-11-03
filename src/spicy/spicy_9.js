@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
     let returnArray = [];
     for (let i = 0; i < n; i++) {
-        returnArray.push(fn(params)); 
+        returnArray.push(fn(...params)); 
     }
     return returnArray;
 };
@@ -30,8 +30,6 @@ export const repeat = (fn, n, ...params) => {
 export const repeatDemo = () => {
     repeat(function (element) {console.log(element)}, 10, "Hello, world!");
 };
-
-//repeatDemo();
 
 
 /**************************************************************************
@@ -52,8 +50,6 @@ export const multiplyBy = (num1) => {
     }
 };
 
-//console.log(multiplyBy(2)(3));
-
 
 /**
  * Use the multiplyBy function to create and export a function named
@@ -64,8 +60,6 @@ export const tenTimes = (num) => {
     return result;
 };
 
-//console.log(tenTimes(11));
-
 
 /**
  * Write and export a function named "tenTimesFifty" which uses the tenTimes
@@ -75,8 +69,6 @@ export const tenTimesFifty = () => {
     let result = tenTimes(50);
     return result;
 };
-
-//console.log(tenTimesFifty());
 
 
 /**************************************************************************
@@ -114,9 +106,6 @@ export const everyEven = (arr, test) => {
     return true;
 };
 
-//console.log(everyEven([1, 5, 1, 0, 1], x => x === 1));
-//console.log(everyEven([1, 1, 0, 1, 1], x => x === 1));
-
 
 /**
  * Write and export a function named "someEven" which takes an array and a test
@@ -148,10 +137,7 @@ export const someEven = (arr, test) => {
     }
     return false;
 };
-//console.log(someEven([4, 3, 2, 1, 0], x => x === 3));
-//console.log(someEven([1, 0, 1, 0, 1], x => x === 0));
-//console.log(someEven([1, 1, 1, 1, 0], x => x === 0));
-//console.log(someEven([0, 0, 0, 0, 0], x => x === 0));
+
 
 /**
  * Write and export a function named "filter" which takes an array and a test
@@ -190,9 +176,6 @@ export const filter = (arr, test) => {
     }
 };
 
-//console.log(filter(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y'));
-//console.log(filter([1, 90, 5, 31], x => x % 2 === 1));
-
 
 /**
  * Write and export a function named "allEvensAreOdd" which takes as input an
@@ -203,8 +186,6 @@ export const allEvensAreOdd = (arr) => {
     return everyEven(arr, x => x % 2 === 1);
 };
 
-//console.log(allEvensAreOdd([1, 2, 3, 4]));
-//console.log(allEvensAreOdd([2, 2, 3, 4]));
 
 /**
  * Write and export a function named "anEvenIsOdd" which takes as input an
@@ -214,9 +195,6 @@ export const allEvensAreOdd = (arr) => {
 export const anEvenIsOdd = (arr) => {
     return someEven(arr, x => x % 2 === 1);
 };
-
-//console.log(anEvenIsOdd([2, 2, 2, 2]));
-//console.log(anEvenIsOdd([1, 2, 2, 2]));
 
 
 /**
@@ -232,8 +210,5 @@ export const hasExactly = (arr, test, n) => {
     }
     return false;
 };
-
-//console.log(hasExactly(['yes', 'nope', 'maybe', 'yellow'], x => x[0] === 'y', 3));
-//console.log(hasExactly([1, 90, 5, 31], x => x % 2 === 1, 1));
 
 

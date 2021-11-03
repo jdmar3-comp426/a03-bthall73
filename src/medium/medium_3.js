@@ -24,7 +24,7 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
     })
     return sorted;
 }
-//console.log(searchHighPower(mpg_data, 250, 150));
+
 
 /**
  * @param {array} car_data
@@ -44,7 +44,6 @@ export function searchMpg(car_data, minCity, minHighway) {
     return sorted;
 }
 
-//console.log(searchMpg(mpg_data, 28, 28));
 
 
 /**
@@ -62,7 +61,7 @@ export function searchName(car_data, searchTerm) {
     })
     return sorted;
 }
-//console.log(searchName(mpg_data, "hp"));
+
 
 
 /**
@@ -81,4 +80,4 @@ export function searchByYear(car_data, years) {
     return sorted;
 }
 
-//console.log(searchByYear(mpg_data, [2010, 2012]));
+
