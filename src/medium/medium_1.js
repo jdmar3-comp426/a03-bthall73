@@ -8,7 +8,11 @@ import {variance} from "./data/stats_helpers.js";
  * prototype functions. Very useful
  */
 export function getSum(array) {
-
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+    return sum;
 }
 
 
@@ -22,8 +26,18 @@ export function getSum(array) {
  * console.log(getMedian(array)); // 4.5
  */
 export function getMedian(array) {
-
+    let median = 0;
+    array.sort((a, b) => a - b);
+    let size = array.length;
+    if (size % 2 == 0) {
+        let middleSum = array[size / 2] + array[(size / 2) - 1];
+        median = middleSum / 2;
+    } else {
+        median = array[(size / 2) - .5];
+    }
+    return median;
 }
+
 
 /**
  * Calculates statistics (see below) on an array of numbers.
@@ -45,6 +59,20 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-
+    let total = 0;
+    for (let i = 0; i < array.length; i++) {
+        total += array[i];
+    }
+    let mean = total / array.length;
+    return {
+        length: array.length,
+        sum: total,
+        mean: mean,
+        median: getMedian(array),
+        min: Math.min(...array), 
+        max: Math.max(...array),
+        variance: variance(array, mean),  
+        standard_deviation: Math.sqrt(variance(array, mean))
+    }
 }
 
